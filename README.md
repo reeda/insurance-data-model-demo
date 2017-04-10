@@ -1,5 +1,6 @@
 # insurance-data-model-demo
 Data Model Demo Program for Seattle U SEGR 5250
+https://desolate-ridge-32865.herokuapp.com/
 
 A demo application created for Seattle U SEGR 5250 - Data Modeling
 Goal was to create a data model for an insurance claim. 
