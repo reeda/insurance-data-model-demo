@@ -7,45 +7,45 @@ UI was not the main goal so there are many known issues.
 
 Data are in tables:
 
-Patient
- -- id
- -- first name
- -- middle initial
- -- last name
- -- phone
- -- sex
- -- marital status
- -- primary doctor (Doctor.id)
+### Patient
+ + id
+ + first name
+ + middle initial
+ + last name
+ + phone
+ + sex
+ + marital status
+ + primary doctor (Doctor.id)
 
-Doctor
- -- id
- -- first name
- -- last name
- -- phone number
+### Doctor
+ + id
+ + first name
+ + last name
+ + phone number
 
-Insurance Claim
- -- id
- -- patient (Patient.id)
- -- primaryInsurance (Insurance.id)
- -- secondaryInsurance (Insurance.id)
+### Insurance Claim
+ + id
+ + patient (Patient.id)
+ + primaryInsurance (Insurance.id)
+ + secondaryInsurance (Insurance.id)
 
-Insurance
- -- id
- -- patient (Patient.id)
- -- insurance plan (Insurance Plan.id)
- -- employer (Employer.id)
+### Insurance
+ + id
+ + patient (Patient.id)
+ + insurance plan (Insurance Plan.id)
+ + employer (Employer.id)
 
-Insurance Plan
- -- id
- -- name
- -- type (PPO, EPO, etc.)
- -- insurance provider (Insurance Provider.id)
+### Insurance Plan
+ + id
+ + name
+ + type (PPO, EPO, etc.)
+ + insurance provider (Insurance Provider.id)
 
-Insurance Provider
- -- id
- -- name
- -- billing code
+### Insurance Provider
+ + id
+ + name
+ + billing code
 
-Employer
- -- id
- -- name
+### Employer
+ + id
+ + name
