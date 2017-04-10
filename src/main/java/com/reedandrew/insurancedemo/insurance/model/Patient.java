@@ -1,17 +1,18 @@
 package com.reedandrew.insurancedemo.insurance.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  *
  * @author reeda.
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Patient {
 
@@ -26,6 +27,7 @@ public class Patient {
     private Sex sex;
     private MaritalStatus maritalStatus;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Doctor primaryDoctor;
 
 

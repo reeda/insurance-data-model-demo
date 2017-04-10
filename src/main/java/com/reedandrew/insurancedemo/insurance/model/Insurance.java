@@ -2,10 +2,7 @@ package com.reedandrew.insurancedemo.insurance.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author reeda.
@@ -17,8 +14,14 @@ public class Insurance {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+
+    @ManyToOne
     private InsurancePlan insurancePlan;
+
+    @ManyToOne
     private Patient patient;
+
+    @ManyToOne
     private Employer employer;
 
 }
