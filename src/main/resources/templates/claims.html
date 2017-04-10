@@ -23,11 +23,11 @@
         </thead>
         <tbody>
         <tr th:each="claim: ${claims}">
-            <td th:text="${claim.id}"></td>
+            <td><a th:href="${'/claims/' + {claim.id}}"><span th:text="${claim.id}"></span></a></td>
             <td th:text="${claim.patient.firstName}"></td>
             <td th:text="${claim.patient.lastName}"></td>
             <td th:text="${claim.primaryInsurance.insurancePlan.insuranceProvider.name}"></td>
-            <td th:if="${claim.secondaryInsurance}" th:text="${claim.secondaryInsurance.insurancePlan.insuranceProvider.name}"></td>
+            <td><span th:if="${claim.secondaryInsurance}" th:text="${claim.secondaryInsurance.insurancePlan.insuranceProvider.name}"></span></td>
         </tr>
         </tbody>
     </table>

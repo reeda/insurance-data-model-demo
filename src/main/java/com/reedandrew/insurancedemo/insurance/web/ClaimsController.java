@@ -6,6 +6,7 @@ import com.reedandrew.insurancedemo.insurance.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,10 +68,16 @@ public class ClaimsController {
                     .firstName(allRequestParams.get("first_name"))
                     .middleInitial(allRequestParams.get("middle_initial"))
                     .lastName(allRequestParams.get("last_name"))
+                    .phoneNumber(allRequestParams.get("phone"))
                     .sex(Sex.fromPresentatinoString(allRequestParams.get("sex")))
                     .maritalStatus(MaritalStatus.fromPresentatinoString(allRequestParams.get("marital_status")))
                     .primaryDoctor(primaryDoctor)
                     .build();
+        }
+
+        if (!patient.getPrimaryDoctor().getFirstName().equalsIgnoreCase(primaryDoctor.getFirstName())
+                && !patient.getPrimaryDoctor().getLastName().equalsIgnoreCase(primaryDoctor.getLastName())) {
+            patient.setPrimaryDoctor(primaryDoctor);
         }
 
         return patient;
@@ -87,7 +94,7 @@ public class ClaimsController {
             primaryDoctor = Doctor.builder()
                     .firstName(firstName)
                     .lastName(lastName)
-                    .phoneNumber(allRequestParams.get("doc_phone_number"))
+                    .phoneNumber(allRequestParams.get("doc_phone"))
                     .build();
         }
 
@@ -140,7 +147,7 @@ public class ClaimsController {
 
     private InsurancePlan getOrCreateInsurancePlan(Map<String, String> allRequestParams, String prefix, InsuranceProvider provider) {
 
-        String planName = allRequestParams.get(prefix + "_plan_name");
+        String planName = allRequestParams.get(prefix + "_plan");
 
         InsurancePlan plan = insurancePlanRepository.findByNameAndInsuranceProvider(planName, provider);
 
@@ -167,7 +174,7 @@ public class ClaimsController {
         if (provider == null) {
             provider = InsuranceProvider.builder()
                     .name(companyName)
-                    .billingCode(allRequestParams.get(prefix + "billing_code"))
+                    .billingCode(allRequestParams.get(prefix + "_billing_code"))
                     .build();
         }
 
@@ -181,6 +188,13 @@ public class ClaimsController {
 
         model.addAttribute("claims", Lists.newArrayList(insuranceClaimRepository.findAll()));
         return "claims";
+    }
+
+    @RequestMapping(path = "/claims/{claim_id}")
+    public String getClaim(@PathVariable("claim_id") Integer claimId, Model model) {
+        InsuranceClaim claim = insuranceClaimRepository.findOne(claimId);
+        model.addAttribute("claim", claim);
+        return "claim";
     }
 
     @Autowired
