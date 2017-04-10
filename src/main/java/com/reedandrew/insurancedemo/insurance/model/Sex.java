@@ -16,4 +16,13 @@ public enum Sex {
     public String getPresentationString() {
         return presentationString;
     }
+
+    public static Sex fromPresentatinoString(String s) {
+        for (Sex sex : Sex.values()) {
+            if (sex.getPresentationString().equalsIgnoreCase(s)) {
+                return sex;
+            }
+        }
+        return OTHER;
+    }
 }

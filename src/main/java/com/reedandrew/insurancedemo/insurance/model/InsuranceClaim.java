@@ -1,6 +1,9 @@
 package com.reedandrew.insurancedemo.insurance.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -8,6 +11,9 @@ import javax.persistence.*;
  * @author reeda.
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class InsuranceClaim {
 
@@ -19,8 +25,8 @@ public class InsuranceClaim {
     private Patient patient;
 
     @ManyToOne
-    private InsurancePlan primaryInsurance;
-
+    private Insurance primaryInsurance;
+    
     @ManyToOne
-    private InsurancePlan secondaryInsurance;
+    private Insurance secondaryInsurance;
 }

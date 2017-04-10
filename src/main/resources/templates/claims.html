@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>What Command Is That Again?</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="jumbotron text-center">
+    <h1>Claims</h1>
+</div>
+
+<div class="container">
+    <table class="table table-striped table-border">
+        <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Patient First Name</th>
+            <th>Patient Last Name</th>
+            <th>Primary Insurance Company</th>
+            <th>Secondary Insurance Company</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="claim: ${claims}">
+            <td th:text="${claim.id}"></td>
+            <td th:text="${claim.patient.firstName}"></td>
+            <td th:text="${claim.patient.lastName}"></td>
+            <td th:text="${claim.primaryInsurance.insurancePlan.insuranceProvider.name}"></td>
+            <td th:if="${claim.secondaryInsurance}" th:text="${claim.secondaryInsurance.insurancePlan.insuranceProvider.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

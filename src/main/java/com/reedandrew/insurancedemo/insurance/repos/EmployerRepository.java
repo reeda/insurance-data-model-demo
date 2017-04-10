@@ -7,4 +7,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author reeda.
  */
 public interface EmployerRepository extends CrudRepository<Employer, Integer> {
+
+    Employer findByName(String name);
 }

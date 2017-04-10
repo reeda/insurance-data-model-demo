@@ -7,4 +7,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author reeda.
  */
 public interface InsuranceProviderRepository extends CrudRepository<InsuranceProvider, Integer> {
+
+    InsuranceProvider findByName(String name);
 }

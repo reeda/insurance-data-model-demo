@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Insurance Data Demo for Seattle U SEGR 5250</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="jumbotron text-center">
+    <h1>Seattle U SEGR 5250: Add Insurance Claim</h1>
+</div>
+<div class="container">
+
+    <form action="/claims" method="post">
+        <div class="panel panel-default">
+            <div class="panel-heading">Patient Info</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input name="first_name" class="form-control" id="first_name">
+                </div>
+                <div class="form-group">
+                    <label for="middle_initial">Middle Initial:</label>
+                    <input name="middle_initial" class="form-control" id="middle_initial">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input name="last_name" class="form-control" id="last_name">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" name="phone" class="form-control" id="phone">
+                </div>
+                <div class="form-group">
+                    <label for="sex">Sex:</label>
+                    <select name="sex" class="form-control" id="sex">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                        <option>I'd rather not say</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="marital_status">Marital Status:</label>
+                    <select name="marital_status" class="form-control" id="marital_status">
+                        <option>Single</option>
+                        <option>Married</option>
+                        <option>Widowed</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Primary Care Doctor Info</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="doc_first_name">First Name:</label>
+                    <input name="doc_first_name" class="form-control" id="doc_first_name">
+                </div>
+                <div class="form-group">
+                    <label for="doc_last_name">Last Name:</label>
+                    <input name="doc_last_name" class="form-control" id="doc_last_name">
+                </div>
+                <div class="form-group">
+                    <label for="doc_phone">Phone Number:</label>
+                    <input type="tel" name="doc_phone" class="form-control" id="doc_phone">
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Primary Insurance Info</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="prim_company">Insurance Company:</label>
+                    <input name="prim_company" class="form-control" id="prim_company">
+                </div>
+                <div class="form-group">
+                    <label for="prim_plan">Plan Name:</label>
+                    <input name="prim_plan" class="form-control" id="prim_plan">
+                </div>
+                <div class="form-group">
+                    <label for="prim_plan_type">Marital Status:</label>
+                    <select name="prim_plan_type" class="form-control" id="prim_plan_type">
+                        <option>PPO</option>
+                        <option>EPO</option>
+                        <option>HDPD</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prim_billing_code">Billing Code:</label>
+                    <input name="prim_billing_code" class="form-control" id="prim_billing_code">
+                </div>
+                <div class="form-group">
+                    <label for="prim_employer">Employer:</label>
+                    <input name="prim_employer" class="form-control" id="prim_employer">
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Secondary Insurance Info</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="sec_company">Insurance Company:</label>
+                    <input name="sec_company" class="form-control" id="sec_company">
+                </div>
+                <div class="form-group">
+                    <label for="sec_plan">Plan Name:</label>
+                    <input name="sec_plan" class="form-control" id="sec_plan">
+                </div>
+                <div class="form-group">
+                    <label for="sec_plan_type">Marital Status:</label>
+                    <select name="sec_plan_type" class="form-control" id="sec_plan_type">
+                        <option>PPO</option>
+                        <option>EPO</option>
+                        <option>HDPD</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sec_billing_code">Billing Code:</label>
+                    <input name="sec_billing_code" class="form-control" id="sec_billing_code">
+                </div>
+                <div class="form-group">
+                    <label for="sec_employer">Employer:</label>
+                    <input name="sec_employer" class="sec-control" id="sec_employer">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+</body>
+</html>

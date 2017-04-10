@@ -7,4 +7,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author reeda.
  */
 public interface DoctorRepository extends CrudRepository<Doctor, Integer> {
+
+    Doctor findByFirstNameAndLastName(String firstName, String lastName);
 }
