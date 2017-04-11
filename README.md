@@ -50,3 +50,5 @@ Data are in tables:
 ### Employer
  + id
  + name
+ 
+ favicon generated from: http://antifavicon.com/
