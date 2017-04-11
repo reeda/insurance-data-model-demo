@@ -1,8 +1,12 @@
 package com.reedandrew.insurancedemo.insurance.web;
 
 import com.google.common.collect.Lists;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 import com.reedandrew.insurancedemo.insurance.model.*;
 import com.reedandrew.insurancedemo.insurance.repos.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +22,7 @@ import java.util.Optional;
 /**
  * @author reeda.
  */
+@Slf4j
 @Controller
 public class ClaimsController {
 
@@ -28,6 +33,8 @@ public class ClaimsController {
     private InsuranceProviderRepository insuranceProviderRepository;
     private InsurancePlanRepository insurancePlanRepository;
     private EmployerRepository employerRepository;
+
+    private static final PhoneNumberUtil PHONE_NUMBER_UTIL = PhoneNumberUtil.getInstance();
 
     @RequestMapping(path = "/claims", method = RequestMethod.POST)
     public String addClaim(@RequestParam Map<String,String> allRequestParams) {
@@ -64,11 +71,14 @@ public class ClaimsController {
         Patient patient = patientRepository.findByFirstNameAndMiddleInitialAndLastName(firstName, middleInitial, lastName);
 
         if (patient == null) {
+
+            Optional<String> phoneNumber = parsePhoneNumber(allRequestParams.get("phone"));
+
             patient = Patient.builder()
                     .firstName(allRequestParams.get("first_name"))
                     .middleInitial(allRequestParams.get("middle_initial"))
                     .lastName(allRequestParams.get("last_name"))
-                    .phoneNumber(allRequestParams.get("phone"))
+                    .phoneNumber(phoneNumber.get())
                     .sex(Sex.fromPresentatinoString(allRequestParams.get("sex")))
                     .maritalStatus(MaritalStatus.fromPresentatinoString(allRequestParams.get("marital_status")))
                     .primaryDoctor(primaryDoctor)
@@ -83,6 +93,16 @@ public class ClaimsController {
         return patient;
     }
 
+    private Optional<String> parsePhoneNumber(String phone) {
+        try {
+            Phonenumber.PhoneNumber phoneNumber = PHONE_NUMBER_UTIL.parse(phone, "US");
+            return Optional.of(PHONE_NUMBER_UTIL.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.E164));
+        } catch (NumberParseException e) {
+            log.debug("Unable to parse phone Number: {}", phone);
+            return Optional.empty();
+        }
+    }
+
     private Doctor getOrCreateDoctor(Map<String, String> allRequestParams) {
 
         String firstName = allRequestParams.get("doc_first_name");
@@ -91,10 +111,13 @@ public class ClaimsController {
         Doctor primaryDoctor = doctorRepository.findByFirstNameAndLastName(firstName, lastName);
 
         if (primaryDoctor == null) {
+
+            Optional<String> phoneNumber = parsePhoneNumber(allRequestParams.get("doc_phone"));
+
             primaryDoctor = Doctor.builder()
                     .firstName(firstName)
                     .lastName(lastName)
-                    .phoneNumber(allRequestParams.get("doc_phone"))
+                    .phoneNumber(phoneNumber.get())
                     .build();
         }
 
